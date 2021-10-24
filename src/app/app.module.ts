@@ -15,6 +15,7 @@ import { AppReminderComponent } from './app-reminder/app-reminder.component';
 import { CalendarDayService } from './service/calendarDay.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CentralizadorApisService } from './service/centralizar-apis.service';
+import { ReminderService } from './service/reminder.service';
 
 
 @NgModule({
@@ -39,7 +40,7 @@ import { CentralizadorApisService } from './service/centralizar-apis.service';
   entryComponents: [
     AppReminderDialog
   ],
-  providers: [CalendarDayService, CentralizadorApisService],
+  providers: [CalendarDayService, CentralizadorApisService, ReminderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

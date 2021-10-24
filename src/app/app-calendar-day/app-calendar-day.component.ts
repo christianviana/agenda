@@ -5,6 +5,7 @@ import { AppReminderDialog } from '../app-reminder-dialog/app-reminder-dialog.co
 import { Time } from '@angular/common';
 import { Reminder } from '../model/Reminder';
 import { CalendarDayService } from '../service/calendarDay.service';
+import { ReminderService } from '../service/reminder.service';
 
 @Component({
   selector: 'app-calendar-day',
@@ -28,11 +29,11 @@ export class AppCalendarDayComponent implements OnInit {
   
   constructor(
       public dialog: MatDialog,
-      private calendarDayService: CalendarDayService)
+      private reminderService: ReminderService)
       {}
 
    public newReminder():void {    
-     this.reminder = new Reminder('', '', '');
+     this.reminder = new Reminder(new Date(), '', '', '');
       const dialogRef = this.dialog.open(AppReminderDialog, {
         width: '400px',
         height: '500px',
@@ -41,12 +42,12 @@ export class AppCalendarDayComponent implements OnInit {
   
       dialogRef.afterClosed().subscribe(result => {
         console.log('The dialog was closed:' + result);        
-        this.reminder = new Reminder('', '', '');
+        this.reminder = new Reminder(new Date(), '', '', '');
         this.reminder.note = result[0];
         this.reminder.time = result[1];
         this.reminder.color = result[2];
         this.reminder.city = result[3];
-        // this.calendarDayService.insertCalendarDay();
+        this.reminderService.insertReminder(this.reminder);
         this.calendarDay.addReminder(this.reminder);
       });    
     }

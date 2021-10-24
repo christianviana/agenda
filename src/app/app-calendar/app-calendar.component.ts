@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CalendarDay } from '../model/CalendarDay';
 import { Reminder } from '../model/Reminder';
 import { CalendarDayService } from '../service/calendarDay.service';
+import { ReminderService } from '../service/reminder.service';
 
 @Component({
   selector: 'app-calendar',
@@ -13,14 +14,14 @@ import { CalendarDayService } from '../service/calendarDay.service';
 export class AppCalendarComponent implements OnInit {
 
   public calendar: CalendarDay[] = []; 
-  public calendarGot: CalendarDay[] = []; 
+  public reminders: Reminder[] = []; 
   constructor(
     public dialog: MatDialog,  
-    private calendarDayService: CalendarDayService) {
-      this.calendarDayService.getCalendarDays()
+    private reminderService: ReminderService) {
+      this.reminderService.getReminders()
         .subscribe(
-          cal => {
-            this.calendarGot = cal,
+          rem => {
+            this.reminders = rem,
             this.generateCalendarDays();
           },
           error => console.log(error)
@@ -64,12 +65,12 @@ export class AppCalendarComponent implements OnInit {
     let finishingDateOfCalendar = this.getFinishDateForCalendar(day);
     let calendarDay: CalendarDay;
     let dif = this.getNumberOfDays(startingDateOfCalendar,finishingDateOfCalendar);
-    let cday: any;
+    let cday: Reminder[];
     for (var i = 0; i < 42; i++) {
       calendarDay = new CalendarDay(new Date(dateToAdd));
-      cday = this.calendarGot.find( d => new Date(d.date).getTime() == dateToAdd.getTime());
-      if (typeof cday != "undefined") {         
-        calendarDay.reminders = cday.reminders;        
+      cday = this.reminders.filter( d => new Date(d.date).getTime() == dateToAdd.getTime());
+      if (cday.length != 0) {         
+        calendarDay.reminders = calendarDay.reminders.concat(cday);        
       } 
       this.calendar.push(calendarDay);
       dateToAdd = new Date(dateToAdd.setDate(dateToAdd.getDate() + 1));
