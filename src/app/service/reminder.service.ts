@@ -23,4 +23,8 @@ export class ReminderService {
         return this.http.post<Reminder>(`${this.api}`, reminder, { headers: this.headers } );
     }
     
+    public updateReminder(reminder: Reminder): Observable<Reminder> {
+        return this.http.put<Reminder>(`${this.api}/${reminder.id}`, reminder, { headers: this.headers } );
+    }
+
 }

@@ -3,6 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AppReminderDialog } from '../app-reminder-dialog/app-reminder-dialog.component';
 import { Reminder } from '../model/Reminder';
+import { ReminderFacade } from '../service/reminder.facade';
 
 @Component({
   selector: 'app-reminder',
@@ -17,7 +18,10 @@ export class AppReminderComponent implements OnInit {
   color?: string;
   city?: string;
 
-  constructor(public dialog: MatDialog) {}
+  constructor(
+    public dialog: MatDialog,  
+    public reminderFacade: ReminderFacade
+  ) {}
 
   @Input()
   public reminder!: Reminder;
@@ -38,6 +42,7 @@ export class AppReminderComponent implements OnInit {
       this.reminder.time = result[1];
       this.reminder.color = result[2];
       this.reminder.city = result[3];
+      this.reminderFacade.updateReminder(this.reminder);
     });    
   }
 
