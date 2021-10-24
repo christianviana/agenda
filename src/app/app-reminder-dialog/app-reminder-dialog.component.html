@@ -1,0 +1,32 @@
+<h1 mat-dialog-title>Reminder: {{data.note}}</h1>
+<div mat-dialog-content>
+  
+
+  <mat-form-field appearance="fill">
+    <mat-label>Note</mat-label>
+    <input matInput [(ngModel)]="data.note">
+  </mat-form-field>
+  
+  
+  <mat-form-field appearance="fill">
+    <mat-label>Time</mat-label>
+    <input matInput type="time" [(ngModel)]="data.time">
+  </mat-form-field>
+  
+  <mat-form-field appearance="fill">
+    <mat-label>Color</mat-label>
+    <input matInput type="color" [(ngModel)]="data.color">
+  </mat-form-field>
+  
+
+  <mat-form-field appearance="fill">
+    <mat-label>City</mat-label>
+    <input matInput [(ngModel)]="data.city">
+  </mat-form-field>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="[data.note, data.time, data.color, data.city]" cdkFocusInitial>Ok</button>
+</div>
+

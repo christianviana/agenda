@@ -1,0 +1,23 @@
+<table class='calendar-table' *ngIf="calendar">
+    <thead>
+      <tr>     
+        <th>Sunday</th>
+        <th>Monday</th>
+        <th>Tuesday</th>
+        <th>Wednesday</th>
+        <th>Thursday</th>
+        <th>Friday</th>
+        <th>Saturday</th>        
+        
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let row of calendar | chunk: 7; let i = index">            
+            <td class="calendar-day" [ngClass]="{'today': c.isToday}"
+            *ngFor="let c of row; let j = index">             
+                <app-calendar-day [calendarDay]=c> </app-calendar-day>                
+            </td>
+      </tr>
+    </tbody>
+  </table>
+

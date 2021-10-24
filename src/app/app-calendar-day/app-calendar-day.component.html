@@ -1,0 +1,14 @@
+
+<div class="calendar-day-header" [ngClass]="{'blue-date': calendarDay.isToday}" (click)="newReminder();">
+<!-- <div class="calendar-day-header" [ngClass]="{'blue-date': calendarDay.isToday}"> -->
+    {{calendarDay.date.getDate()}} 
+    <span *ngIf="(calendarDay.date.getDate() == 1)"> 
+        {{calendarDay.date.toLocaleString('default', { month: 'short' })}}
+    </span>
+</div>
+
+<span *ngFor="let reminder of calendarDay.reminders; let i = index">                    
+    <app-reminder [reminder]=reminder> </app-reminder>  
+</span>
+   
+
