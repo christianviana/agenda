@@ -45,7 +45,7 @@ private generateCalendarDays(month: number): CalendarDay[] {
     let calendar: CalendarDay[] = [];
     let day: Date = new Date()
     day.setHours(0,0,0,0);
-    day.setMonth(month+1);
+    day.setMonth(month);
 
     // find first and last days of calendar, and number of days
     let firstDay = this.getFisrtDayOfCalendar(day);
@@ -148,7 +148,5 @@ private groupDays(calendarDaysArray: CalendarDay[], groupSize: number): any {
     }
       return calendarDays;
     }
-  
-
+ 
 }
-
