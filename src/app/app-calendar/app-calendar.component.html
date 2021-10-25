@@ -4,9 +4,10 @@
   <button mat-button (click)="previousMonth()"> < </button>  
   <button mat-button (click)="nextMonth()"> > </button>
   <button class="month-title" mat-button disabled> 
-    {{this.month.toLocaleString('default', { month: 'long' })}} 
-    {{this.month.getFullYear()}}
+    {{this.date.toLocaleString('default', { month: 'long' })}} 
+    {{this.date.getFullYear()}}
   </button>
+  
 
 </div>
 

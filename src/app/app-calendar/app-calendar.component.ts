@@ -11,7 +11,7 @@ import { ReminderService } from '../service/reminder.service';
 
 export class AppCalendarComponent implements OnInit {
 
-  public month: Date = new Date();
+  public date: Date = new Date();
   public calendar: CalendarDay[] = []; 
   public calendarGrouped: CalendarDay[][] = []; 
   public reminders: Reminder[] = []; 
@@ -32,7 +32,7 @@ export class AppCalendarComponent implements OnInit {
       .subscribe(
         reminder => {            
           this.reminders = reminder;
-          this.calendar = this.generateCalendarDays(this.month.getMonth());
+          this.calendar = this.generateCalendarDays(this.date);
           // group the in groups of 7 calendarDays (a week)
           this.calendarGrouped = this.groupDays(this.calendar,this.daysPerRow);
         },
@@ -44,14 +44,13 @@ export class AppCalendarComponent implements OnInit {
  
 /**
  * Generate the calendar days for a given month, 
- * @param month 
+ * @param date 
  */
-private generateCalendarDays(month: number): CalendarDay[] {    
+private generateCalendarDays(date: Date): CalendarDay[] {    
         
     let calendar: CalendarDay[] = [];
-    let day: Date = new Date()    
+    let day: Date = new Date(date)    
     day.setHours(0,0,0,0);
-    day.setMonth(month);
 
     // find first and last days of calendar, and number of days
     let firstDay = this.getFisrtDayOfCalendar(day);
@@ -156,18 +155,18 @@ private groupDays(calendarDaysArray: CalendarDay[], groupSize: number): any {
     }
   
   nextMonth(): void {
-    this.month.setMonth(this.month.getMonth()+1);
+    this.date.setMonth(this.date.getMonth()+1);
     this.generateCalendar();
   }
 
   previousMonth(): void {
-    this.month.setMonth(this.month.getMonth()-1);
+    this.date.setMonth(this.date.getMonth()-1);
     this.generateCalendar();
   }
 
   today(): void {
-    this.month.setMonth(new Date().getMonth());
-    this.month.setFullYear(new Date().getFullYear());
+    this.date.setMonth(new Date().getMonth());
+    this.date.setFullYear(new Date().getFullYear());
     this.generateCalendar();
   }
   
