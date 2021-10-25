@@ -167,6 +167,7 @@ private groupDays(calendarDaysArray: CalendarDay[], groupSize: number): any {
 
   today(): void {
     this.month.setMonth(new Date().getMonth());
+    this.month.setFullYear(new Date().getFullYear());
     this.generateCalendar();
   }
   
