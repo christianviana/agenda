@@ -19,7 +19,7 @@ export class AppReminderDialog {
     public dialogRef: MatDialogRef<AppReminderDialog>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 
-  onNoClick(): void {
+  onCancelClick(): void {
     this.dialogRef.close();
   }
 

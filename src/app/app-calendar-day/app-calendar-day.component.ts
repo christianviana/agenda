@@ -35,22 +35,24 @@ export class AppCalendarDayComponent implements OnInit {
       {}
 
    public newReminder():void {    
-      this.reminder = new Reminder(this.calendarDay.date, '12:00', '', '');
+      this.reminder = new Reminder(this.calendarDay.date, '09:00', '', '#0066ff');
       const dialogRef = this.dialog.open(AppReminderDialog, {
-        width: '400px',
         height: '500px',
+        width: '300px',
         data: {note: this.reminder.note, time: this.reminder.time, color: this.reminder.color, city: this.reminder.city}
       });
   
       dialogRef.afterClosed().subscribe(result => {
         console.log('The dialog was closed:' + result);        
-        this.reminder = new Reminder(this.calendarDay.date, '', '', '');
-        this.reminder.note = result[0];
-        this.reminder.time = result[1];
-        this.reminder.color = result[2];
-        this.reminder.city = result[3];
-        this.reminderFacade.insertReminder(this.reminder);
-        this.calendarDay.addReminder(this.reminder);
+        if (result) {
+          this.reminder = new Reminder(this.calendarDay.date, '', '', '#0066ff');
+          this.reminder.note = result[0];
+          this.reminder.time = result[1];
+          this.reminder.color = result[2];
+          this.reminder.city = result[3];
+          this.reminderFacade.insertReminder(this.reminder);
+          this.calendarDay.addReminder(this.reminder);
+        }
       });    
    
     }

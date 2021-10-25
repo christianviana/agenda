@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Reminder: {{data.note}}</h1>
+<h1 mat-dialog-title>Reminder</h1>
 <div mat-dialog-content>
   
 
@@ -26,7 +26,7 @@
 
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button (click)="onCancelClick()">Cancel</button>
   <button mat-button [mat-dialog-close]="[data.note, data.time, data.color, data.city]" cdkFocusInitial>Ok</button>
 </div>
 

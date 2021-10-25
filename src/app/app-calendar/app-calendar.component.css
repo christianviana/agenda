@@ -17,16 +17,13 @@
     padding: .75rem;
     vertical-align: top;
     border-top: 1px solid #dee2e6;
-    border: 1px solid #dee2e6;
+    border: 1px solid #dee2e6;    
   }
   
-  .calendar-items-wrapper {
-    margin-left: -10px;
-    margin-right: -10px;
-    overflow-y: auto;
-    max-height: calc(100% - 20px);
+  .calendar-table td {
+    height: 60px; 
   }
-    
+
   .calendar-day:hover {
     background-color: rgb(248, 248, 248);
   }

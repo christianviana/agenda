@@ -2,7 +2,6 @@ import { Component, Inject, OnInit, Pipe, PipeTransform } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CalendarDay } from '../model/CalendarDay';
 import { Reminder } from '../model/Reminder';
-import { CalendarDayService } from '../service/calendarDay.service';
 import { ReminderService } from '../service/reminder.service';
 
 @Component({

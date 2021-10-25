@@ -1,10 +1,7 @@
 .blue-date {
-  color: rgb(16, 110, 190);
+  color: rgb(255, 254, 254);
+  background-color:  rgb(21, 77, 197);
+  border-radius: 30px;
+  padding: 4px;
 }
 
-.calendar-items-wrapper {
-  margin-left: -10px;
-  margin-right: -10px;
-  overflow-y: auto;
-  max-height: calc(100% - 20px);
-}

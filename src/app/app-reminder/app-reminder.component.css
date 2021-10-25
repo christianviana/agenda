@@ -1,0 +1,14 @@
+.reminder-block {   
+    vertical-align: top;
+    color: aliceblue;
+    border-radius: 4px;
+    margin-top: 3px;
+    margin-left: 20px;
+    padding: 2px;
+    font-family: cursive;
+    
+  }
+
+.reminder-block:hover { 
+    cursor: pointer;
+  }
