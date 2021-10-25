@@ -19,27 +19,19 @@ export class AppCalendarComponent implements OnInit {
     private reminderService: ReminderService) {
       this.reminderService.getReminders()
         .subscribe(
-          rem => {
+          rem => {            
             this.reminders = rem,
-            this.generateCalendarDays();
+            this.generateCalendarDays(new Date().getMonth());
           },
           error => console.log(error)
       );
 
     }
 
-
-  ngOnInit(): void {
-    // here we initialize the calendar
-    
-    //this.generateCalendarDays();
-  }  
+  ngOnInit(): void {}  
  
-  // private getCalendarDays(): void {
-    
-  // }
 
-  private generateCalendarDays(): void {    
+  private generateCalendarDays(month: number): void {    
     
     // we reset our calendar every time
     this.calendar = [];
@@ -47,6 +39,7 @@ export class AppCalendarComponent implements OnInit {
     // we set the date 
     let day: Date = new Date()
     day.setHours(0,0,0,0);
+    day.setMonth(month);
 
     // here we find the first day that our calendar will start from
     // it would be the last Monday of the previous month
@@ -75,11 +68,10 @@ export class AppCalendarComponent implements OnInit {
       dateToAdd = new Date(dateToAdd.setDate(dateToAdd.getDate() + 1));
      
     }
-  
-
   }
 
-  private getStartDateForCalendar(selectedDate: Date){
+
+  private getStartDateForCalendar(selectedDate: Date) {
     // for the day we selected let's get the previous month last day
     let lastDayOfPreviousMonth = new Date(selectedDate.setDate(0));
 
@@ -97,7 +89,8 @@ export class AppCalendarComponent implements OnInit {
     return startingDateOfCalendar;
   }
 
-  private getFinishDateForCalendar(selectedDate: Date){
+
+  private getFinishDateForCalendar(selectedDate: Date) {
     
     // start by setting the finishing date of the calendar same as the last day of this month
     let finishingDateOfCalendar: Date = selectedDate;   
@@ -131,8 +124,7 @@ export class AppCalendarComponent implements OnInit {
     const diffInDays = Math.round(diffInTime / oneDay);
 
     return diffInDays;
-}
-
+  }
 }
 
 @Pipe({
