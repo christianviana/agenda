@@ -1,3 +1,15 @@
+
+<div align='center'>
+  <button mat-button (click)="today()">Today</button> 
+  <button mat-button (click)="previousMonth()"> < </button>  
+  <button mat-button disabled> 
+  {{this.month.toLocaleString('default', { month: 'long' })}} 
+  {{this.month.getFullYear()}}
+  </button>
+  <button mat-button (click)="nextMonth()"> > </button>
+
+</div>
+
 <table class='calendar-table' *ngIf="calendarGrouped">
     <thead>
       <tr>     

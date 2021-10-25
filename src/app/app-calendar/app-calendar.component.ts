@@ -11,28 +11,33 @@ import { ReminderService } from '../service/reminder.service';
 
 export class AppCalendarComponent implements OnInit {
 
+  public month: Date = new Date();
   public calendar: CalendarDay[] = []; 
   public calendarGrouped: CalendarDay[][] = []; 
   public reminders: Reminder[] = []; 
 
-  /**
-   * Create the calendar for current month, adding previously saved reminders
-   * @param reminderService 
-   */
+  
   constructor(
     private reminderService: ReminderService) {
-      this.reminderService.getReminders()
-        .subscribe(
-          reminder => {            
-            this.reminders = reminder;
-            this.calendar = this.generateCalendarDays(new Date().getMonth());
-            // group the in groups of 7 calendarDays (a week)
-            this.calendarGrouped = this.groupDays(this.calendar,7);
-          },
-          error => console.log(error)
-      );
-
+      this.generateCalendar();
     }
+
+    /**
+     * Create the calendar for current month, adding previously saved reminders
+     *    
+     */
+    private generateCalendar() {
+      this.reminderService.getReminders()
+      .subscribe(
+        reminder => {            
+          this.reminders = reminder;
+          this.calendar = this.generateCalendarDays(this.month.getMonth());
+          // group the in groups of 7 calendarDays (a week)
+          this.calendarGrouped = this.groupDays(this.calendar,7);
+        },
+        error => console.log(error)
+    )}
+    
 
   ngOnInit(): void {}  
  
@@ -148,5 +153,20 @@ private groupDays(calendarDaysArray: CalendarDay[], groupSize: number): any {
     }
       return calendarDays;
     }
- 
+  
+  nextMonth(): void {
+    this.month.setMonth(this.month.getMonth()+1);
+    this.generateCalendar();
+  }
+
+  previousMonth(): void {
+    this.month.setMonth(this.month.getMonth()-1);
+    this.generateCalendar();
+  }
+
+  today(): void {
+    this.month.setMonth(new Date().getMonth());
+    this.generateCalendar();
+  }
+  
 }
