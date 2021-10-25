@@ -25,7 +25,7 @@ export class AppReminderDialog {
       this.form = new FormGroup({
       note: new FormControl(this.data.note, [
         Validators.required,
-        Validators.maxLength(2)        
+        Validators.maxLength(30)        
       ])
     });
     }
