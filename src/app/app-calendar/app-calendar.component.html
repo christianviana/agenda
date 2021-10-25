@@ -1,34 +1,35 @@
 
-<div align='center'>
+<div class="calendar-title">
   <button mat-button (click)="today()">Today</button> 
   <button mat-button (click)="previousMonth()"> < </button>  
-  <button mat-button disabled> 
-  {{this.month.toLocaleString('default', { month: 'long' })}} 
-  {{this.month.getFullYear()}}
-  </button>
   <button mat-button (click)="nextMonth()"> > </button>
+  <button class="month-title" mat-button disabled> 
+    {{this.month.toLocaleString('default', { month: 'long' })}} 
+    {{this.month.getFullYear()}}
+  </button>
+
+<!--   
+<mat-form-field appearance="fill">
+  <mat-label>Cars</mat-label>
+  <select matNativeControl required>
+    <option value="volvo">Volvo</option>
+    <option value="saab">Saab</option>
+    <option value="mercedes">Mercedes</option>
+    <option value="audi">Audi</option>
+  </select>
+</mat-form-field> -->
+
+  <!-- <app-days-per-row></app-days-per-row> -->
 
 </div>
 
-<table class='calendar-table' *ngIf="calendarGrouped">
-    <thead>
-      <tr>     
-        <th>Sunday</th>
-        <th>Monday</th>
-        <th>Tuesday</th>
-        <th>Wednesday</th>
-        <th>Thursday</th>
-        <th>Friday</th>
-        <th>Saturday</th>        
-        
-      </tr>
-    </thead>
+<table class='calendar-table' *ngIf="calendarGrouped">    
     <tbody>
-        <tr *ngFor="let row of calendarGrouped">            
-            <td *ngFor="let day of row" class="calendar-day" [ngClass]="{'today': day.isToday}">             
-                <app-calendar-day [calendarDay]=day> </app-calendar-day>                
+        <tr *ngFor="let line of calendarGrouped; let row = index">            
+            <td *ngFor="let day of line; let col = index" class="calendar-day" [ngClass]="{'today': day.isToday}">             
+                <app-calendar-day [calendarDay]=day [row]=row [col]=col> </app-calendar-day>                
             </td>
       </tr>
     </tbody>
-  </table>
+</table>
 

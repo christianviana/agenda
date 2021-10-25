@@ -4,7 +4,6 @@ import { CalendarDay } from '../model/CalendarDay';
 import { AppReminderDialog } from '../app-reminder-dialog/app-reminder-dialog.component';
 import { Time } from '@angular/common';
 import { Reminder } from '../model/Reminder';
-import { ReminderService } from '../service/reminder.service';
 import { ReminderFacade } from '../service/reminder.facade';
 
 @Component({
@@ -18,6 +17,12 @@ export class AppCalendarDayComponent implements OnInit {
   @Input()
   public calendarDay!: CalendarDay;
 
+  @Input()
+  public row: number = 0;
+
+  @Input()
+  public col: number = 0;
+
   note?: string;
   time?: Time;
   color?: string;
@@ -28,8 +33,7 @@ export class AppCalendarDayComponent implements OnInit {
   }
   
   constructor(
-      public dialog: MatDialog,
-      private reminderService: ReminderService,
+      public dialog: MatDialog,      
       public reminderFacade: ReminderFacade)
       {}
 

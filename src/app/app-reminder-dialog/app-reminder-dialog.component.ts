@@ -34,6 +34,10 @@ export class AppReminderDialog {
     this.dialogRef.close();
   }
 
+  onDeleteClick(): void {
+    console.log("Deleting...");
+    this.dialogRef.close();
+  }
 
   get note() { return this.form.get('note'); }
 

@@ -36,6 +36,7 @@
 </form>
 
 <div mat-dialog-actions>
+  <button mat-button (click)="onDeleteClick()"><i class="fas fa-calendar-alt"></i></button>
   <button mat-button (click)="onCancelClick()">Cancel</button>
   <button mat-button [mat-dialog-close]="[data.note, data.time, data.color, data.city]" cdkFocusInitial>
     Ok

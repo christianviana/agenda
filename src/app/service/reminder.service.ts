@@ -27,4 +27,9 @@ export class ReminderService {
         return this.http.put<Reminder>(`${this.api}/${reminder.id}`, reminder, { headers: this.headers } );
     }
 
+    public deleteReminder(reminder: Reminder): Observable<Reminder> {
+        return this.http.delete<Reminder>(`${this.api}/${reminder.id}`);
+    }
+
+
 }

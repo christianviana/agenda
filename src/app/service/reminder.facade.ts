@@ -44,5 +44,17 @@ export class ReminderFacade implements OnDestroy {
         } );
   }
 
+  deleteReminder( reminder: Reminder): void {
+    this.reminderService.deleteReminder( reminder )
+        .subscribe( rem => {
+        const message: Message = { msg: `Reminder deleted.`, type: 'success' };            
+        }, error => {
+        const message: Message = {
+            msg: `Error: ${ error?.message }`,
+            type: 'error',
+        };
+        } );
+  }
+
   
 }

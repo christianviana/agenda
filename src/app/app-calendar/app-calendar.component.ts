@@ -15,6 +15,7 @@ export class AppCalendarComponent implements OnInit {
   public calendar: CalendarDay[] = []; 
   public calendarGrouped: CalendarDay[][] = []; 
   public reminders: Reminder[] = []; 
+  public daysPerRow: number = 7;
 
   
   constructor(
@@ -33,7 +34,7 @@ export class AppCalendarComponent implements OnInit {
           this.reminders = reminder;
           this.calendar = this.generateCalendarDays(this.month.getMonth());
           // group the in groups of 7 calendarDays (a week)
-          this.calendarGrouped = this.groupDays(this.calendar,7);
+          this.calendarGrouped = this.groupDays(this.calendar,this.daysPerRow);
         },
         error => console.log(error)
     )}
@@ -48,7 +49,7 @@ export class AppCalendarComponent implements OnInit {
 private generateCalendarDays(month: number): CalendarDay[] {    
         
     let calendar: CalendarDay[] = [];
-    let day: Date = new Date()
+    let day: Date = new Date()    
     day.setHours(0,0,0,0);
     day.setMonth(month);
 
