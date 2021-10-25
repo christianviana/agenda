@@ -8,10 +8,6 @@ export interface Message {
     type: 'error' | 'success';
   }
 
-  export interface LocalizacaoState {
-    loading: boolean;
-    message: Message;
-  }
 
 @Injectable()
 export class ReminderFacade implements OnDestroy {

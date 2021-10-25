@@ -4,7 +4,6 @@ import { CalendarDay } from '../model/CalendarDay';
 import { AppReminderDialog } from '../app-reminder-dialog/app-reminder-dialog.component';
 import { Time } from '@angular/common';
 import { Reminder } from '../model/Reminder';
-import { CalendarDayService } from '../service/calendarDay.service';
 import { ReminderService } from '../service/reminder.service';
 import { ReminderFacade } from '../service/reminder.facade';
 

@@ -12,10 +12,9 @@
       </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let row of calendar | chunk: 7; let i = index">            
-            <td class="calendar-day" [ngClass]="{'today': c.isToday}"
-            *ngFor="let c of row; let j = index">             
-                <app-calendar-day [calendarDay]=c> </app-calendar-day>                
+        <tr *ngFor="let row of calendar | group: 7">            
+            <td *ngFor="let day of row" class="calendar-day" [ngClass]="{'today': day.isToday}">             
+                <app-calendar-day [calendarDay]=day> </app-calendar-day>                
             </td>
       </tr>
     </tbody>
