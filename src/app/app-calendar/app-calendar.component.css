@@ -11,6 +11,8 @@
     vertical-align: bottom;
     border-bottom: 2px solid #dee2e6;
     width: 14.2%;
+    color: rgb(78, 74, 74);
+    font-size: 14px;
   }
   
   .calendar-table td, .calendar-table th {

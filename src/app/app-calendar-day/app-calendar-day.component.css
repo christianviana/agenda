@@ -1,7 +1,13 @@
 .blue-date {
   color: rgb(255, 254, 254);
   background-color:  rgb(21, 77, 197);
-  border-radius: 30px;
-  padding: 4px;
+  border-radius: 10px;
+  padding: 5px;
 }
 
+.calendar-day-header {
+  text-align: center;
+  margin-bottom: 15px;
+  color: rgb(41, 38, 38);
+  font-size: 14px;
+}

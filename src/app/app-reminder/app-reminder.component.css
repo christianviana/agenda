@@ -1,11 +1,13 @@
 .reminder-block {   
     vertical-align: top;
     color: aliceblue;
-    border-radius: 4px;
-    margin-top: 3px;
-    margin-left: 20px;
-    padding: 2px;
-    font-family: cursive;
+    border-radius: 5px;
+    margin-top: 1px;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding: 3px;
+    font-family: 'Lucida Sans';
+    font-size: 15px;
     
   }
 
