@@ -1,4 +1,4 @@
-import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CalendarDay } from '../model/CalendarDay';
 import { Reminder } from '../model/Reminder';
 import { ReminderService } from '../service/reminder.service';
@@ -12,6 +12,7 @@ import { ReminderService } from '../service/reminder.service';
 export class AppCalendarComponent implements OnInit {
 
   public calendar: CalendarDay[] = []; 
+  public calendarGrouped: CalendarDay[][] = []; 
   public reminders: Reminder[] = []; 
 
   /**
@@ -24,7 +25,9 @@ export class AppCalendarComponent implements OnInit {
         .subscribe(
           reminder => {            
             this.reminders = reminder;
-            this.generateCalendarDays(new Date().getMonth());
+            this.calendar = this.generateCalendarDays(new Date().getMonth());
+            // group the in groups of 7 calendarDays (a week)
+            this.calendarGrouped = this.groupDays(this.calendar,7);
           },
           error => console.log(error)
       );
@@ -37,12 +40,12 @@ export class AppCalendarComponent implements OnInit {
  * Generate the calendar days for a given month, 
  * @param month 
  */
-private generateCalendarDays(month: number): void {    
+private generateCalendarDays(month: number): CalendarDay[] {    
         
-    this.calendar = [];
+    let calendar: CalendarDay[] = [];
     let day: Date = new Date()
     day.setHours(0,0,0,0);
-    day.setMonth(month);
+    day.setMonth(month+1);
 
     // find first and last days of calendar, and number of days
     let firstDay = this.getFisrtDayOfCalendar(day);
@@ -62,9 +65,10 @@ private generateCalendarDays(month: number): void {
       if (reminderstoAdd.length != 0) {         
         calendarDay.reminders = calendarDay.reminders.concat(reminderstoAdd);        
       } 
-      this.calendar.push(calendarDay);
+      calendar.push(calendarDay);
       dateToAdd = new Date(dateToAdd.setDate(dateToAdd.getDate() + 1));     
     }
+    return calendar;
  }
 
 /**
@@ -72,9 +76,9 @@ private generateCalendarDays(month: number): void {
  * It will be the last Sunday of previous month
  * 
  * @param selectedDate 
- * @returns 
+ * @returns the first date of calendar
  */
-private getFisrtDayOfCalendar(selectedDate: Date) {
+private getFisrtDayOfCalendar(selectedDate: Date): Date {
 
     // set starting date as last day of previous month
     let startDate: Date = new Date(selectedDate);
@@ -93,9 +97,9 @@ private getFisrtDayOfCalendar(selectedDate: Date) {
  * It will be the last Saturday of last week of current month
  * 
  * @param selectedDate 
- * @returns 
+ * @returns the last date of calendar
  */
-private getLastDayOfCalendar(selectedDate: Date) {
+private getLastDayOfCalendar(selectedDate: Date): Date {
     
     // set the finishing date as last day of this month
     let finishDate: Date = selectedDate;   
@@ -109,7 +113,7 @@ private getLastDayOfCalendar(selectedDate: Date) {
     return finishDate;
 }
 
-private getNumberOfDays(start: Date, end: Date) {
+private getNumberOfDays(start: Date, end: Date): number {
   const date1 = new Date(start);
   date1.setHours(0, 0, 0, 0);
   const date2 = new Date(end);
@@ -122,26 +126,29 @@ private getNumberOfDays(start: Date, end: Date) {
   const diffInDays = Math.round(diffInTime / oneDay);
   return diffInDays;
   }
+
+/**
+ * 
+ * Groups the calendar days in the informed size
+ * 
+ * @param calendarDaysArray 
+ * @param groupSize 
+ * @returns the grouped calendar
+ */    
+private groupDays(calendarDaysArray: CalendarDay[], groupSize: number): any {
+      let calendarDays: CalendarDay[][] = [];
+      let group: CalendarDay[]  = [];
+  
+      for (var i = 1; i < calendarDaysArray.length+1; i++) {
+        group.push(calendarDaysArray[i-1]);
+        if (i % groupSize  === 0) {
+          calendarDays.push(group);
+          group = [];          
+        }        
+    }
+      return calendarDays;
+    }
+  
+
 }
 
-@Pipe({
-  name: 'group'
-})
-export class GroupPipe implements PipeTransform {
-
-  transform(calendarDaysArray: CalendarDay[], groupSize: number): any {
-    let calendarDays: CalendarDay[][] = [];
-    let weekDays: CalendarDay[]  = [];
-
-    calendarDaysArray.map((day: CalendarDay, index: number) => {
-        weekDays.push(day);
-        // here we need to use ++ in front of the variable else index increase 
-        //will happen after the evaluation but we need it to happen BEFORE
-        if (++index % groupSize  === 0) {
-          calendarDays.push(weekDays);
-          weekDays = [];          
-        }
-    });
-    return calendarDays;
-  }
-}

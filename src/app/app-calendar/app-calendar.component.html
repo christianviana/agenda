@@ -1,4 +1,4 @@
-<table class='calendar-table' *ngIf="calendar">
+<table class='calendar-table' *ngIf="calendarGrouped">
     <thead>
       <tr>     
         <th>Sunday</th>
@@ -12,7 +12,7 @@
       </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let row of calendar | group: 7">            
+        <tr *ngFor="let row of calendarGrouped">            
             <td *ngFor="let day of row" class="calendar-day" [ngClass]="{'today': day.isToday}">             
                 <app-calendar-day [calendarDay]=day> </app-calendar-day>                
             </td>
