@@ -9,7 +9,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule} from '@angular/material/input';
 import { MatButtonModule} from '@angular/material/button';
-import { ChunkPipe, AppCalendarComponent } from './app-calendar/app-calendar.component';
+import { GroupPipe, AppCalendarComponent } from './app-calendar/app-calendar.component';
 import { AppCalendarDayComponent } from './app-calendar-day/app-calendar-day.component';
 import { AppReminderDialog } from './app-reminder-dialog/app-reminder-dialog.component';
 import { AppReminderComponent } from './app-reminder/app-reminder.component';
@@ -24,7 +24,7 @@ import { ReminderFacade } from './service/reminder.facade';
   declarations: [
     AppComponent,
     AppCalendarComponent,
-    ChunkPipe,
+    GroupPipe,
     AppCalendarDayComponent,    
     AppReminderDialog, 
     AppReminderComponent
