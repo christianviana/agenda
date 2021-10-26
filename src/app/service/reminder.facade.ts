@@ -56,5 +56,15 @@ export class ReminderFacade implements OnDestroy {
         } );
   }
 
-  
+  getRemindersByDateRange(start: Date, end: Date): Reminder[] {
+    let reminders: Reminder[] = [];     
+    this.reminderService.getRemindersByDateRange(start, end)
+      .subscribe(
+        remindersGot => {            
+          reminders = remindersGot;        
+        },
+        error => console.log(error)
+      )
+    return reminders;        
+    }  
 }
