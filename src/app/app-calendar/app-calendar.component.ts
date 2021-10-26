@@ -11,7 +11,7 @@ import { ReminderService } from '../service/reminder.service';
 
 export class AppCalendarComponent implements OnInit {
 
-  public date: Date = new Date();
+  public date;
   public calendar: CalendarDay[] = []; 
   public calendarGrouped: CalendarDay[][] = []; 
   public reminders: Reminder[] = []; 
@@ -20,45 +20,51 @@ export class AppCalendarComponent implements OnInit {
   
   constructor(
     private reminderService: ReminderService) {
-      this.generateCalendar();
+      this.date = new  Date();
+      this.generateCalendar(this.date);    
     }
 
-    /**
-     * Create the calendar for current month, adding previously saved reminders
+  
+     /**
+     * Create the calendar for informed date's month, adding previously saved reminders
      *    
      */
-    private generateCalendar() {
-      this.reminderService.getReminders()
-      .subscribe(
-        reminder => {            
-          this.reminders = reminder;
-          this.calendar = this.generateCalendarDays(this.date);
-          // group the in groups of 7 calendarDays (a week)
-          this.calendarGrouped = this.groupDays(this.calendar,this.daysPerRow);
-        },
-        error => console.log(error)
-    )}
+      private generateCalendar(date: Date) {
+        // find first and last days of calendar
+        let start = this.getFisrtDayOfCalendar(date);
+        let end = this.getLastDayOfCalendar(date);  
+
+        this.reminderService.getRemindersByDateRange(start, end)
+        .subscribe(
+          reminder => {            
+            this.reminders = reminder;
+            this.calendar = this.generateCalendarDays(start, end);
+            // group the in groups of 7 calendarDays (a week)
+            this.calendarGrouped = this.groupDays(this.calendar,this.daysPerRow);
+          },
+          error => console.log(error)
+      )}
     
 
-  ngOnInit(): void {}  
+  ngOnInit(): void {
+  
+  }  
  
+
 /**
- * Generate the calendar days for a given month, 
- * @param date 
+ * Generate the calendar days for a given period
+ * @param start beggining of period
+ * @param end end of period
  */
-private generateCalendarDays(date: Date): CalendarDay[] {    
+private generateCalendarDays(start: Date, end: Date): CalendarDay[] {    
         
     let calendar: CalendarDay[] = [];
-    let day: Date = new Date(date)    
-    day.setHours(0,0,0,0);
 
-    // find first and last days of calendar, and number of days
-    let firstDay = this.getFisrtDayOfCalendar(day);
-    let lastDay = this.getLastDayOfCalendar(day);
-    let numOfDaysCalendar = this.getNumberOfDays(firstDay,lastDay)+1;
+    // find calendar's number of days
+     let numOfDaysCalendar = this.getNumberOfDays(start,end)+1;
 
     // variable that will get increased in the 'for' loop
-    let dateToAdd = firstDay;
+    let dateToAdd = start;
     let calendarDay: CalendarDay;
     let reminderstoAdd: Reminder[];
 
@@ -88,6 +94,7 @@ private getFisrtDayOfCalendar(selectedDate: Date): Date {
     // set starting date as last day of previous month
     let startDate: Date = new Date(selectedDate);
     startDate.setDate(0);
+    startDate.setHours(0,0,0,0);
     
     // go back in days until last Sunday of previous month
     while (startDate.getDay() != 0) {
@@ -107,9 +114,10 @@ private getFisrtDayOfCalendar(selectedDate: Date): Date {
 private getLastDayOfCalendar(selectedDate: Date): Date {
     
     // set the finishing date as last day of this month
-    let finishDate: Date = selectedDate;   
+    let finishDate: Date = new Date(selectedDate);   
     finishDate.setMonth(finishDate.getMonth()+1);
     finishDate.setDate(0);
+    finishDate.setHours(0,0,0,0);
     
     // go forward until we encounter last Saturday of current calendar
     while (finishDate.getDay() != 6) {
@@ -156,18 +164,18 @@ private groupDays(calendarDaysArray: CalendarDay[], groupSize: number): any {
   
   nextMonth(): void {
     this.date.setMonth(this.date.getMonth()+1);
-    this.generateCalendar();
+    this.generateCalendar(this.date);
   }
 
   previousMonth(): void {
     this.date.setMonth(this.date.getMonth()-1);
-    this.generateCalendar();
+    this.generateCalendar(this.date);
   }
 
   today(): void {
     this.date.setMonth(new Date().getMonth());
     this.date.setFullYear(new Date().getFullYear());
-    this.generateCalendar();
+    this.generateCalendar(this.date);
   }
   
 }
