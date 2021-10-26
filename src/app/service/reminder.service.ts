@@ -19,6 +19,10 @@ export class ReminderService {
         return this.http.get<Reminder[]>(`${this.api}`);
       }
 
+    public getRemindersByDateRange(start: Date, end: Date): Observable<Reminder[]> {
+        return this.http.get<Reminder[]>(`${this.api}`+"?startingDate="+start+"&endDate="+end);
+    }
+
     public insertReminder(reminder: Reminder): Observable<Reminder> {
         return this.http.post<Reminder>(`${this.api}`, reminder, { headers: this.headers } );
     }
