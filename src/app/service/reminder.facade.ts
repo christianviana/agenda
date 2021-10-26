@@ -60,10 +60,16 @@ export class ReminderFacade implements OnDestroy {
     let reminders: Reminder[] = [];     
     this.reminderService.getRemindersByDateRange(start, end)
       .subscribe(
-        remindersGot => {            
+        remindersGot => {    
+          const message: Message = { msg: `Reminders got.`, type: 'success' };        
           reminders = remindersGot;        
         },
-        error => console.log(error)
+        error => {
+          const message: Message = {
+              msg: `Error: ${ error?.message }`,
+              type: 'error',
+          };
+          } 
       )
     return reminders;        
     }  
