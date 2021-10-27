@@ -46,7 +46,7 @@ export class AppCalendarDayComponent implements OnInit {
       });
   
       dialogRef.afterClosed().subscribe(result => {
-        console.log('The dialog was closed:' + result);        
+        
         if (result && result[0] != '') {
           this.reminder = new Reminder(this.calendarDay.date, '', '', '#0066ff');
           this.reminder.note = result[0];
