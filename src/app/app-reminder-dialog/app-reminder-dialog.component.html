@@ -26,8 +26,8 @@
 </mat-dialog-content>
 
 <div mat-dialog-actions>
-  <!-- <button mat-button (click)="onDeleteClick(reminder)">Del</button> -->
-  <button mat-button>Cancel</button>
+  <!-- <button mat-button [mat-dialog-close]="[reminder, true]">Del</button> -->
+  <button mat-button mat-dialog-close>Cancel</button>
   <button mat-button cdkFocusInitial [mat-dialog-close]="[reminder]">
     Ok
   </button>
