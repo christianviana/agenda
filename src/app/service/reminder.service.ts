@@ -20,7 +20,7 @@ export class ReminderService {
       }
 
     public getRemindersByDateRange(start: Date, end: Date): Observable<Reminder[]> {
-        return this.http.get<Reminder[]>(`${this.api}`+"?startingDate="+start+"&endDate="+end);
+        return this.http.get<Reminder[]>(`${this.api}?startingDate=${start}&endDate=${end}`);
     }
 
     public insertReminder(reminder: Reminder): Observable<Reminder> {
