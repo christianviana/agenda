@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 
 @Injectable()
-export class CentralizadorApisService {
+export class ApiCenterService {
 
   endpoints = environment.endpoints;
 

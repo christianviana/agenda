@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { CentralizadorApisService } from "./centralizar-apis.service";
+import { ApiCenterService } from "./api-center.service";
 import { Observable } from "rxjs";
 import { Reminder } from "../model/Reminder";
 
@@ -10,10 +10,10 @@ export class ReminderService {
     /**
      * API's URL
      */
-    private api: string = this.centralizadorApis.getApi() + '/reminders';
+    private api: string = this.apiCenter.getApi() + '/reminders';
     constructor(
         private http: HttpClient,
-        private centralizadorApis: CentralizadorApisService) { };
+        private apiCenter: ApiCenterService) { };
 
     public getReminders(): Observable<Reminder[]> {
         return this.http.get<Reminder[]>(`${this.api}`);

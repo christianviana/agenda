@@ -15,7 +15,7 @@ import { AppReminderDialog } from './app-reminder-dialog/app-reminder-dialog.com
 import { AppReminderComponent } from './app-reminder/app-reminder.component';
 import { CalendarDayService } from './service/calendarDay.service';
 import { HttpClientModule } from '@angular/common/http';
-import { CentralizadorApisService } from './service/centralizar-apis.service';
+import { ApiCenterService } from './service/api-center.service';
 import { ReminderService } from './service/reminder.service';
 import { ReminderFacade } from './service/reminder.facade';
 import { MessageService } from './service/message.service';
@@ -44,7 +44,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar'
   entryComponents: [
     AppReminderDialog
   ],
-  providers: [CalendarDayService, CentralizadorApisService, 
+  providers: [CalendarDayService, ApiCenterService, 
       ReminderService, ReminderFacade, MessageService],
   bootstrap: [AppComponent]
 })

@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { CentralizadorApisService } from "./centralizar-apis.service";
+import { ApiCenterService } from "./api-center.service";
 import { Observable } from "rxjs";
 import { CalendarDay } from "../model/CalendarDay";
 
@@ -13,7 +13,7 @@ export class CalendarDayService {
     private api: string = this.centralizadorApis.getApi() + '/calendar-days';
     constructor(
         private http: HttpClient,
-        private centralizadorApis: CentralizadorApisService) { };
+        private centralizadorApis: ApiCenterService) { };
 
     public getCalendarDays(): Observable<CalendarDay[]> {
         return this.http.get<CalendarDay[]>(`${this.api}`);

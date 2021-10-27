@@ -7,32 +7,32 @@
     background-color: #fff;
   }
   
-  .calendar-table thead th {
-    vertical-align: bottom;
-    border-bottom: 2px solid #dee2e6;
-    width: 14.2%;
-    color: rgb(78, 74, 74);
-    font-size: 14px;
-  }
-  
-  .calendar-table td, .calendar-table th {
-    padding: .75rem;
-    width: 14.2%;
-    vertical-align: top;
-    border-top: 1px solid #dee2e6;
-    border: 1px solid #dee2e6;    
-  }
-  
-  .calendar-table td {
-    height: 60px; 
-  }
+.calendar-table thead th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #dee2e6;
+  width: 14.2%;
+  color: rgb(78, 74, 74);
+  font-size: 14px;
+}
 
-  .calendar-day:hover {
-    background-color: rgb(248, 248, 248);
-  }
-  
-  .calendar-title .mat-button {
-    min-width: 10px;
-  }
+.calendar-table td, .calendar-table th {
+  padding: .75rem;
+  width: 14.2%;
+  vertical-align: top;
+  border-top: 1px solid #dee2e6;
+  border: 1px solid #dee2e6;    
+}
 
-  
+.calendar-table td {
+  height: 60px; 
+}
+
+.calendar-day:hover {
+  background-color: rgb(248, 248, 248);
+}
+
+.calendar-title .mat-button {
+  min-width: 10px;
+}
+
+

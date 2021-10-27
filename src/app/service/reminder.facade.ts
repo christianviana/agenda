@@ -1,5 +1,4 @@
 import { Injectable, OnDestroy } from "@angular/core";
-import { Subscription } from "rxjs";
 import { Reminder } from "../model/Reminder";
 import { ReminderService } from "./reminder.service";
 import { MessageService } from "./message.service";
@@ -9,7 +8,8 @@ import { MessageService } from "./message.service";
 export class ReminderFacade  {
     
 
-  constructor(private reminderService: ReminderService, private messageService: MessageService) 
+  constructor(private reminderService: ReminderService, 
+    private messageService: MessageService) 
   { }
 
   insertReminder( reminder: Reminder): void {
