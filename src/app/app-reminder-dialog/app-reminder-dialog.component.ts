@@ -1,5 +1,4 @@
 import {Component, Inject} from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { Reminder } from '../model/Reminder';
 
@@ -26,22 +25,10 @@ export class AppReminderDialog {
       this.reminder.time = data.reminder.time;
       this.reminder.color = data.reminder.color;
       this.reminder.city = data.reminder.city;
-
-    //   this.form = new FormGroup({
-    //   note: new FormControl(this.data.note, [
-    //     Validators.required,
-    //     Validators.maxLength(30)        
-    //   ])
-    // });
     }
-
-  onCancelClick(): void {
-    this.dialogRef.close();
-  }
   
   save(event: Event): void {    
+    console.log("dialog closed");
     this.dialogRef.close();
   }
-
-
 }
