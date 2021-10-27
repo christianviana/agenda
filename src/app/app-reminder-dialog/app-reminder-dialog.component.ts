@@ -14,7 +14,7 @@ export interface ReminderDialogData {
 
 export class AppReminderDialog {
   
-  reminder: Reminder = new Reminder(new Date(), '','','');
+  reminder: Reminder = new Reminder(new Date(), '','','#FFFFFF');
 
   constructor(
     private dialogRef: MatDialogRef<AppReminderDialog>,
@@ -23,6 +23,7 @@ export class AppReminderDialog {
       this.reminder.id = data.reminder.id;
       this.reminder.note = data.reminder.note;     
       this.reminder.date = data.reminder.date;
+      this.reminder.time = data.reminder.time;
       this.reminder.color = data.reminder.color;
       this.reminder.city = data.reminder.city;
 
