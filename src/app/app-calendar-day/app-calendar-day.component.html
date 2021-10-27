@@ -13,7 +13,7 @@
 
 <div> 
     <span *ngFor="let reminder of calendarDay.reminders">                    
-        <app-reminder [reminder]=reminder> </app-reminder>  
+        <app-reminder [reminder]=reminder [calendarDay]=calendarDay> </app-reminder>  
     </span>
 </div>   
 
