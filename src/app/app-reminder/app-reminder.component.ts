@@ -36,7 +36,7 @@ export class AppReminderComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed:' + result);        
+      
       if (result && result[0] != '') {
         this.reminder.note = result[0];
         this.reminder.time = result[1];

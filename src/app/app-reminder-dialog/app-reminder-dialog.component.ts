@@ -35,7 +35,7 @@ export class AppReminderDialog {
   }
 
   onDeleteClick(): void {
-    console.log("Deleting...");
+    
     this.dialogRef.close();
   }
 
