@@ -5,7 +5,7 @@
     </div>
     <div> 
        <span [ngClass]="{'today': calendarDay.isToday}"> {{calendarDay.date.getDate()}}     </span>
-    <span *ngIf="(calendarDay.date.getDate() == 1)"> 
+    <span *ngIf="(calendarDay.date.getDate() == 1) || (row==0 && col==0)"> 
         {{calendarDay.date.toLocaleString('default', { month: 'short' })}}
     </span>
     </div>
