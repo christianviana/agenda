@@ -1,46 +1,46 @@
+<h1 mat-dialog-title>Reminder</h1>
 
-<form name="form">
-
-  <h1 mat-dialog-title>Reminder</h1>
-
-  <div *ngIf="note.invalid && (note.dirty || note.touched)" class="alert">
-    <div *ngIf="note.errors?.required">
+<form (submit)="save($event)" #formDirective="ngForm">  
+  <mat-dialog-content>
+   <!-- <div *ngIf="note?.invalid && (note?.dirty || note?.touched)" class="alert">
+    <div *ngIf="note?.errors?.required">
       Note is required
     </div>
-    <div *ngIf="note.errors?.maxlength">
+    <div *ngIf="note?.errors?.maxlength">
       Note must be not exceed max 30 characters long
     </div>  
-  </div> 
+  </div>   -->
 
   <mat-form-field appearance="fill">
     <mat-label>Note</mat-label>
-    <input name="note" class="form-control" maxlength="30" matInput 
-        required  [(ngModel)]="data.note" #note="ngModel">
+    <input name="note" maxlength="4" minlength="2"  matInput required [(ngModel)]="reminder.note" > 
   </mat-form-field>
     
   <mat-form-field appearance="fill">
     <mat-label>Time</mat-label>
-    <input name="time" matInput required type="time" [(ngModel)]="data.time">
+    <input name="time" matInput required type="time" [(ngModel)]="reminder.time">
   </mat-form-field>
   
   <mat-form-field appearance="fill">
     <mat-label>Color</mat-label>
-    <input name="color" matInput required type="color" [(ngModel)]="data.color">
+    <input name="color" matInput required type="color" [(ngModel)]="reminder.color">
   </mat-form-field>
   
   <mat-form-field appearance="fill">
     <mat-label>City</mat-label>
-    <input name="city" matInput [(ngModel)]="data.city">
-  </mat-form-field>
+    <input name="city" matInput [(ngModel)]="reminder.city">
+  </mat-form-field> 
 
-</form>
+</mat-dialog-content>
 
-<div mat-dialog-actions>  
-  <button mat-button (click)="onCancelClick()">Cancel</button>
-  <button mat-button [mat-dialog-close]="[data.note, data.time, data.color, data.city]" cdkFocusInitial>
+<div mat-dialog-actions>
+  <!-- <button mat-button (click)="onDeleteClick(reminder)">Del</button> -->
+  <button mat-button>Cancel</button>
+  <button mat-button cdkFocusInitial [mat-dialog-close]="[reminder]">
     Ok
   </button>
 
 </div>
 
+</form>
 

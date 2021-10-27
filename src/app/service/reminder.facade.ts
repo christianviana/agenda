@@ -8,9 +8,10 @@ import { MessageService } from "./message.service";
 export class ReminderFacade  {
     
 
-  constructor(private reminderService: ReminderService, 
+  constructor(
+    private reminderService: ReminderService, 
     private messageService: MessageService) 
-  { }
+    { }
 
   insertReminder( reminder: Reminder): void {
       this.reminderService.insertReminder( reminder )

@@ -2,9 +2,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CalendarDay } from '../model/CalendarDay';
 import { AppReminderDialog } from '../app-reminder-dialog/app-reminder-dialog.component';
-import { Time } from '@angular/common';
 import { Reminder } from '../model/Reminder';
-import { ReminderFacade } from '../service/reminder.facade';
+import { MessageService } from '../service/message.service';
+import { ReminderService } from '../service/reminder.service';
 
 @Component({
   selector: 'app-calendar-day',
@@ -22,41 +22,37 @@ export class AppCalendarDayComponent implements OnInit {
 
   @Input()
   public col: number = 0;
-
-  note?: string;
-  time?: Time;
-  color?: string;
-  city?: string;
-  reminder?: Reminder;
   
   ngOnInit(): void {
   }
   
   constructor(
-      public dialog: MatDialog,      
-      public reminderFacade: ReminderFacade)
+      private dialog: MatDialog,            
+      private messageService: MessageService,
+      private reminderService: ReminderService)
       {}
 
    public newReminder():void {    
-      this.reminder = new Reminder(this.calendarDay.date, '09:00', '', '#0066ff');
-      const dialogRef = this.dialog.open(AppReminderDialog, {
-        height: '500px',
-        width: '300px',
-        data: {note: this.reminder.note, time: this.reminder.time, color: this.reminder.color, city: this.reminder.city}
-      });
+    let newReminder = new Reminder(this.calendarDay.date, '09:00', '', '#0066ff');
+    const dialogRef = this.dialog.open(AppReminderDialog, {
+      height: '500px',
+      width: '300px',
+      data: {reminder: newReminder}
+    });
   
-      dialogRef.afterClosed().subscribe(result => {
-        
-        if (result && result[0] != '') {
-          this.reminder = new Reminder(this.calendarDay.date, '', '', '#0066ff');
-          this.reminder.note = result[0];
-          this.reminder.time = result[1];
-          this.reminder.color = result[2];
-          this.reminder.city = result[3];
-          this.reminderFacade.insertReminder(this.reminder);
-          this.calendarDay.addReminder(this.reminder);
+    dialogRef.afterClosed().subscribe(result => {        
+      if (result && result[0]) {          
+        newReminder = result[0];
+        this.reminderService.insertReminder(newReminder)
+          .subscribe( rem => {          
+            this.calendarDay.addReminder(newReminder);
+            this.messageService.success("Reminder added.");
+          }, error => {
+            this.messageService.error('Error adding reminder. See log for details.');            
+            console.log(`Error adding reminder: ${error?.message}` );
+          } );         
         }
-      });    
+    });    
    
     }
 

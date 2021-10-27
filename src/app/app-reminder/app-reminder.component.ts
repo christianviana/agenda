@@ -1,9 +1,9 @@
-import { Time } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AppReminderDialog } from '../app-reminder-dialog/app-reminder-dialog.component';
 import { Reminder } from '../model/Reminder';
-import { ReminderFacade } from '../service/reminder.facade';
+import { ReminderService } from '../service/reminder.service';
+import { MessageService } from '../service/message.service';
 
 @Component({
   selector: 'app-reminder',
@@ -12,14 +12,10 @@ import { ReminderFacade } from '../service/reminder.facade';
 })
 export class AppReminderComponent implements OnInit {
  
-  note?: string;
-  time?: Time;
-  color?: string;
-  city?: string;
-
   constructor(
-    public dialog: MatDialog,  
-    public reminderFacade: ReminderFacade
+    private dialog: MatDialog,  
+    private reminderService: ReminderService,
+    private messageService: MessageService
   ) {}
 
   @Input()
@@ -28,23 +24,28 @@ export class AppReminderComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public editReminder():void {    
+  public editReminder():void {        
+
     const dialogRef = this.dialog.open(AppReminderDialog, {
       height: '500px',
       width: '300px',
-      data: {note: this.reminder.note, time: this.reminder.time, color: this.reminder.color, city: this.reminder.city}
+      data: {reminder: this.reminder}
     });
 
     dialogRef.afterClosed().subscribe(result => {
       
-      if (result && result[0] != '') {
-        this.reminder.note = result[0];
-        this.reminder.time = result[1];
-        this.reminder.color = result[2];
-        this.reminder.city = result[3];
-        this.reminderFacade.updateReminder(this.reminder);
-      }      
-    });
+      if (result && result[0]) {    
+        let updatedReminder = result[0];
+        this.reminderService.updateReminder(updatedReminder)
+        .subscribe( rem => {                   
+          this.reminder = updatedReminder;
+          this.messageService.success("Reminder updated.");          
+        }, error => {
+          this.messageService.error('Error updating reminder. See log for details.');            
+          console.log(`Error updating reminder: ${error?.message}` );
+        } );         
+        }
+    });    
     
   }
 }
