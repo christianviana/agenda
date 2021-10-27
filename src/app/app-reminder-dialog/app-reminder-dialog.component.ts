@@ -13,7 +13,7 @@ export interface ReminderDialogData {
 
 export class AppReminderDialog {
   
-  reminder: Reminder = new Reminder(new Date(), '','','#FFFFFF');
+  reminder: Reminder = new Reminder('', new Date(), '','','#FFFFFF');
 
   constructor(
     private dialogRef: MatDialogRef<AppReminderDialog>,
