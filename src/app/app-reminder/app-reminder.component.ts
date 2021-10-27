@@ -11,7 +11,7 @@ import { MessageService } from '../service/message.service';
   styleUrls: ['./app-reminder.component.css']
 })
 export class AppReminderComponent implements OnInit {
- 
+
   constructor(
     private dialog: MatDialog,  
     private reminderService: ReminderService,
@@ -33,19 +33,29 @@ export class AppReminderComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      
-      if (result && result[0]) {    
-        let updatedReminder = result[0];
-        this.reminderService.updateReminder(updatedReminder)
-        .subscribe( rem => {                   
-          this.reminder = updatedReminder;
-          this.messageService.success("Reminder updated.");          
-        }, error => {
-          this.messageService.error('Error updating reminder. See log for details.');            
-          console.log(`Error updating reminder: ${error?.message}` );
-        } );         
+      if (result) {
+        if (result[1]) {
+          //this.deleteReminder(result[0]);          
+        } else {
+          this.upDateReminder(result[0]);
         }
-    });    
-    
+      }
+    });        
   }
+
+  private upDateReminder(reminderToUpdade: Reminder):void {
+    if (reminderToUpdade) {          
+      this.reminderService.updateReminder(reminderToUpdade)
+      .subscribe( rem => {                   
+        this.reminder = reminderToUpdade;
+        this.messageService.success("Reminder updated.");          
+      }, error => {
+        this.messageService.error('Error updating reminder. See log for details.');            
+        console.log(`Error updating reminder: ${error?.message}` );
+      } );         
+      }
+  }
+
+
+
 }
