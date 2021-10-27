@@ -23,6 +23,8 @@ export class AppCalendarDayComponent implements OnInit {
   @Input()
   public col: number = 0;
   
+  reminder?: Reminder;
+
   ngOnInit(): void {
   }
   
