@@ -28,8 +28,6 @@ export class AppReminderDialog implements OnInit {
     }
   
     ngOnInit(): void {
-     
-    
     }
 
 }
