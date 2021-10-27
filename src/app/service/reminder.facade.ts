@@ -2,75 +2,60 @@ import { Injectable, OnDestroy } from "@angular/core";
 import { Subscription } from "rxjs";
 import { Reminder } from "../model/Reminder";
 import { ReminderService } from "./reminder.service";
-
-export interface Message {
-    msg: string;
-    type: 'error' | 'success';
-  }
+import { MessageService } from "./message.service";
 
 
 @Injectable()
-export class ReminderFacade implements OnDestroy {
+export class ReminderFacade  {
     
-  subscription: Subscription = new Subscription();
 
-  constructor( private reminderService: ReminderService) { }
-
-  ngOnDestroy(): void {
-      this.subscription.unsubscribe();
-    }
+  constructor(private reminderService: ReminderService, private messageService: MessageService) 
+  { }
 
   insertReminder( reminder: Reminder): void {
       this.reminderService.insertReminder( reminder )
-          .subscribe( rem => {
-          const message: Message = { msg: `Reminder added.`, type: 'success' };            
+          .subscribe( rem => {          
+          this.messageService.success("Reminder added.");
           }, error => {
-          const message: Message = {
-              msg: `Error: ${ error?.message }`,
-              type: 'error',
-          };
+          this.messageService.error('Error adding reminder. See log for details.');            
+          console.log(`Error adding reminder: ${error?.message}` );
           } );
   }
 
   updateReminder( reminder: Reminder): void {
     this.reminderService.updateReminder( reminder )
-        .subscribe( rem => {
-        const message: Message = { msg: `Reminder updated.`, type: 'success' };            
+        .subscribe( rem => {        
+        this.messageService.success("Reminder updated.");        
         }, error => {
-        const message: Message = {
-            msg: `Error: ${ error?.message }`,
-            type: 'error',
-        };
-        } );
+          this.messageService.error('Error updating reminder. See log for details.');            
+          console.log(`Error updating reminder: ${error?.message}` );
+          } );
   }
 
   deleteReminder( reminder: Reminder): void {
     this.reminderService.deleteReminder( reminder )
-        .subscribe( rem => {
-        const message: Message = { msg: `Reminder deleted.`, type: 'success' };            
+        .subscribe( rem => {        
+        this.messageService.success("Reminder deleted.");        
         }, error => {
-        const message: Message = {
-            msg: `Error: ${ error?.message }`,
-            type: 'error',
-        };
-        } );
+          this.messageService.error('Error deleting reminder. See log for details.');            
+          console.log(`Error deleting reminder: ${error?.message}` );
+          }  );
   }
 
   getRemindersByDateRange(start: Date, end: Date): Reminder[] {
     let reminders: Reminder[] = [];     
     this.reminderService.getRemindersByDateRange(start, end)
       .subscribe(
-        remindersGot => {    
-          const message: Message = { msg: `Reminders got.`, type: 'success' };        
-          reminders = remindersGot;        
+        remindersLoaded => {              
+          this.messageService.success("Reminders loaded.");
+          reminders = remindersLoaded;        
         },
-        error => {
-          const message: Message = {
-              msg: `Error: ${ error?.message }`,
-              type: 'error',
-          };
+        error =>{
+          this.messageService.error('Error loading reminders. See log for details.');            
+          console.log(`Error loading reminders: ${error?.message}` );
           } 
       )
     return reminders;        
     }  
+
 }

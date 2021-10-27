@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CalendarDay } from '../model/CalendarDay';
 import { Reminder } from '../model/Reminder';
 import { ReminderService } from '../service/reminder.service';
+import { MessageService } from '../service/message.service';
 
 @Component({
   selector: 'app-calendar',
@@ -19,7 +20,7 @@ export class AppCalendarComponent implements OnInit {
 
   
   constructor(
-    private reminderService: ReminderService) {
+    private reminderService: ReminderService, private messageService: MessageService) {
       this.date = new  Date();
       this.generateCalendar(this.date);    
     }
@@ -42,8 +43,12 @@ export class AppCalendarComponent implements OnInit {
             // group the in groups of 7 calendarDays (a week)
             this.calendarGrouped = this.groupDays(this.calendar,this.daysPerRow);
           },
-          error => console.log(error)
-      )}
+          error => {
+            console.log(`Error loading reminders: ${error?.message}`)
+            this.messageService.error('Error loading reminders. See log for details.');            
+          }
+        );
+      }
     
 
   ngOnInit(): void {

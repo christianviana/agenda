@@ -2,3 +2,27 @@
 
 html, body { height: 100%; }
 body { margin: 0; }
+
+
+.snack-success {
+    background-color: #71b270;
+}
+
+.snack-error {    
+    background-color: #000000;
+    color: white;    
+}
+
+.snack-error button {    
+    color: white;
+}
+
+.snack-warning {
+    background-color: #f6a634;
+}
+
+.snack-info {
+    background-color: #497683;
+}
+
+

@@ -18,7 +18,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { CentralizadorApisService } from './service/centralizar-apis.service';
 import { ReminderService } from './service/reminder.service';
 import { ReminderFacade } from './service/reminder.facade';
-
+import { MessageService } from './service/message.service';
+import { MatSnackBarModule } from '@angular/material/snack-bar'
 
 @NgModule({
   declarations: [
@@ -37,12 +38,14 @@ import { ReminderFacade } from './service/reminder.facade';
     MatDialogModule,
     MatFormFieldModule,
     MatButtonModule,
-    HttpClientModule
+    HttpClientModule,
+    MatSnackBarModule
   ],
   entryComponents: [
     AppReminderDialog
   ],
-  providers: [CalendarDayService, CentralizadorApisService, ReminderService, ReminderFacade],
+  providers: [CalendarDayService, CentralizadorApisService, 
+      ReminderService, ReminderFacade, MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
