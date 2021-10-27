@@ -1,4 +1,4 @@
-import {Component, Inject} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { Reminder } from '../model/Reminder';
 
@@ -11,7 +11,7 @@ export interface ReminderDialogData {
   templateUrl: 'app-reminder-dialog.component.html',
 })
 
-export class AppReminderDialog {
+export class AppReminderDialog implements OnInit {
   
   reminder: Reminder = new Reminder('', new Date(), '','','#FFFFFF');
 
@@ -27,8 +27,9 @@ export class AppReminderDialog {
       this.reminder.city = data.reminder.city;
     }
   
-  save(event: Event): void {    
-    console.log("dialog closed");
-    this.dialogRef.close();
-  }
+    ngOnInit(): void {
+     
+    
+    }
+
 }
