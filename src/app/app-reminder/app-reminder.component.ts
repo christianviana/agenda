@@ -1,9 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AppReminderDialog } from '../app-reminder-dialog/app-reminder-dialog.component';
 import { Reminder } from '../model/Reminder';
 import { ReminderService } from '../service/reminder.service';
 import { MessageService } from '../service/message.service';
+import { CalendarDay } from '../model/CalendarDay';
 
 @Component({
   selector: 'app-reminder',
@@ -11,6 +12,7 @@ import { MessageService } from '../service/message.service';
   styleUrls: ['./app-reminder.component.css']
 })
 export class AppReminderComponent implements OnInit {
+  
 
   constructor(
     private dialog: MatDialog,  
@@ -20,6 +22,9 @@ export class AppReminderComponent implements OnInit {
 
   @Input()
   public reminder!: Reminder;
+
+  @Input()
+  public calendarDay!: CalendarDay;
 
   ngOnInit(): void {
   }
@@ -35,7 +40,7 @@ export class AppReminderComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         if (result[1]) {
-          //this.deleteReminder(result[0]);          
+          this.deleteReminder(result[0]);          
         } else {
           this.upDateReminder(result[0]);
         }
@@ -56,6 +61,18 @@ export class AppReminderComponent implements OnInit {
       }
   }
 
+  private deleteReminder(reminderToDelete: Reminder):void {
+    if (reminderToDelete) {          
+      this.reminderService.deleteReminder(reminderToDelete)
+      .subscribe( rem => {                   
+        this.calendarDay.reminders = this.calendarDay.reminders.filter(r => r.id!== reminderToDelete.id);
+        this.messageService.success("Reminder deleted.");          
+      }, error => {
+        this.messageService.error('Error deleting reminder. See log for details.');            
+        console.log(`Error deleting reminder: ${error?.message}` );
+      } );         
+      }
+  }
 
 
 }
