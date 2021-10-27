@@ -45,7 +45,7 @@ export class AppCalendarDayComponent implements OnInit {
         newReminder = result[0];
         this.reminderService.insertReminder(newReminder)
           .subscribe( rem => {          
-            this.calendarDay.addReminder(newReminder);
+            this.calendarDay.addReminder(rem);
             this.messageService.success("Reminder added.");
           }, error => {
             this.messageService.error('Error adding reminder. See log for details.');            
