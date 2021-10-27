@@ -21,9 +21,7 @@ export class AppCalendarDayComponent implements OnInit {
   public row: number = 0;
 
   @Input()
-  public col: number = 0;
-  
-  reminder?: Reminder;
+  public col: number = 0;  
 
   ngOnInit(): void {
   }
