@@ -1,15 +1,7 @@
 <h1 mat-dialog-title>Reminder</h1>
 
-<form (submit)="save($event)" #formDirective="ngForm">  
+<form #formDirective="ngForm">  
   <mat-dialog-content>
-   <!-- <div *ngIf="note?.invalid && (note?.dirty || note?.touched)" class="alert">
-    <div *ngIf="note?.errors?.required">
-      Note is required
-    </div>
-    <div *ngIf="note?.errors?.maxlength">
-      Note must be not exceed max 30 characters long
-    </div>  
-  </div>   -->
 
   <mat-form-field appearance="fill">
     <mat-label>Note</mat-label>
