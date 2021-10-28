@@ -12,7 +12,7 @@
 </div>
 
 <div> 
-    <span *ngFor="let reminder of calendarDay.reminders">                    
+    <span *ngFor="let reminder of calendarDay.getSortedReminders()"> 
         <app-reminder [reminder]=reminder [calendarDay]=calendarDay> </app-reminder>  
     </span>
 </div>   

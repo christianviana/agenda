@@ -15,4 +15,9 @@ export class CalendarDay {
   public addReminder(reminder: Reminder): void {
     this.reminders.push(reminder);
   }
+
+  public getSortedReminders(): Reminder[] {
+    return this.reminders.sort( (rem1,rem2) => rem1.time.localeCompare(rem2.time) );
+  }
+  
 }
