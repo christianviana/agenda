@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AppReminderDialog } from '../app-reminder-dialog/app-reminder-dialog.component';
 import { Reminder } from '../model/Reminder';
