@@ -35,8 +35,8 @@ export class AppCalendarDayComponent implements OnInit {
    public newReminder():void {    
     let newReminder = new Reminder('', this.calendarDay.date, '09:00', '', '#0066ff');
     const dialogRef = this.dialog.open(AppReminderDialog, {
-      height: '500px',
-      width: '300px',
+      height: '430px',
+      width: '330px',
       data: {reminder: newReminder, isNew: true}
     });
   

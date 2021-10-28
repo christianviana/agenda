@@ -12,6 +12,7 @@ export interface ReminderDialogData {
 @Component({
   selector: 'app-reminder-dialog',
   templateUrl: 'app-reminder-dialog.component.html',
+  styleUrls: ['./app-reminder-dialog.component.css']
 })
 
 export class AppReminderDialog implements OnInit {

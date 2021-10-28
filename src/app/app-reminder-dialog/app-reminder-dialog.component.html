@@ -3,22 +3,22 @@
 <form #formDirective="ngForm">  
   <mat-dialog-content>
 
-  <mat-form-field appearance="fill">
+  <mat-form-field  >
     <mat-label>Note</mat-label>
-    <input name="note" maxlength="30" matInput required [formControl]="noteFormControl" [(ngModel)]="reminder.note"> 
+    <input name="note"  cdkFocusInitial maxlength="30" matInput required [formControl]="noteFormControl" [(ngModel)]="reminder.note"> 
   </mat-form-field>
     
-  <mat-form-field appearance="fill">
+  <mat-form-field >
     <mat-label>Time</mat-label>
     <input name="time" matInput required type="time" [(ngModel)]="reminder.time">
   </mat-form-field>
   
-  <mat-form-field appearance="fill">
+  <mat-form-field >
     <mat-label>Color</mat-label>
     <input name="color" matInput required type="color" [(ngModel)]="reminder.color">
   </mat-form-field>
   
-  <mat-form-field appearance="fill">
+  <mat-form-field>
     <mat-label>City</mat-label>
     <input name="city" matInput [(ngModel)]="reminder.city">
   </mat-form-field> 
@@ -30,9 +30,10 @@
     Cancel
   </button>  
   <button *ngIf="!isNew" mat-button [mat-dialog-close]="[reminder, true]">
+        <!-- <i class="fas fa-trash"></i> -->
     Delete
   </button>  
-  <button mat-button cdkFocusInitial  (click)="save($event)">
+  <button mat-button (click)="save($event)">
     Save
   </button>
 </div>
