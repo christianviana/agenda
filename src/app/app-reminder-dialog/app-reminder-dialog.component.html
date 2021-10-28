@@ -26,15 +26,14 @@
 </mat-dialog-content>
 
 <div mat-dialog-actions>  
-  <button mat-button mat-dialog-close>
+  <button mat-raised-button mat-dialog-close>
     Cancel
   </button>  
-  <button *ngIf="!isNew" mat-button [mat-dialog-close]="[reminder, true]">
-        <!-- <i class="fas fa-trash"></i> -->
+  <button *ngIf="!isNew" mat-raised-button [mat-dialog-close]="[reminder, true]">
     Delete
   </button>  
-  <button mat-button (click)="save($event)">
-    Save
+  <button mat-raised-button color="primary" (click)="save($event)">
+    Save        
   </button>
 </div>
 
