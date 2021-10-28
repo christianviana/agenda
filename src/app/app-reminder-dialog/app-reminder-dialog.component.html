@@ -5,7 +5,7 @@
 
   <mat-form-field appearance="fill">
     <mat-label>Note</mat-label>
-    <input name="note" maxlength="30" matInput required [formControl]="noteFormControl"> 
+    <input name="note" maxlength="30" matInput required [formControl]="noteFormControl" [(ngModel)]="reminder.note"> 
   </mat-form-field>
     
   <mat-form-field appearance="fill">
