@@ -2,6 +2,7 @@ import {Component, Inject, OnInit, ViewChild} from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { Reminder } from '../model/Reminder';
+import { MessageService } from '../service/message.service';
 
 export interface ReminderDialogData {
   reminder: Reminder
@@ -20,7 +21,8 @@ export class AppReminderDialog implements OnInit {
   
   constructor(
     private dialogRef: MatDialogRef<AppReminderDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: ReminderDialogData) {
+    @Inject(MAT_DIALOG_DATA) public data: ReminderDialogData,
+    private messageService: MessageService) {
 
       this.reminder = new Reminder('',new Date(),'','','');
       this.reminder.id = data.reminder.id;
@@ -43,8 +45,11 @@ export class AppReminderDialog implements OnInit {
     }
 
     save(event:Event): void {
-      if (this.noteFormControl.invalid) return;
-        this.dialogRef.close([this.reminder]);
+      if (this.noteFormControl.invalid) {
+          this.messageService.warning('Please inform a note.');  
+          return;
+      } 
+      this.dialogRef.close([this.reminder]);
     }
 
 }
