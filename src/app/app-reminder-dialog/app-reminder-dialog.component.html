@@ -5,7 +5,7 @@
 
   <mat-form-field appearance="fill">
     <mat-label>Note</mat-label>
-    <input name="note" maxlength="30" matInput required [(ngModel)]="reminder.note" > 
+    <input name="note" maxlength="30" matInput required [formControl]="noteFormControl"> 
   </mat-form-field>
     
   <mat-form-field appearance="fill">
@@ -29,10 +29,10 @@
   <button mat-button mat-dialog-close>
     Cancel
   </button>  
-  <button *ngIf="reminder.id!==''" mat-button [mat-dialog-close]="[reminder, true]">
+  <button *ngIf="!isNew" mat-button [mat-dialog-close]="[reminder, true]">
     Delete
   </button>  
-  <button mat-button cdkFocusInitial [mat-dialog-close]="[reminder]">
+  <button mat-button cdkFocusInitial  (click)="save($event)">
     Ok
   </button>
 </div>
