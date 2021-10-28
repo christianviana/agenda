@@ -16,6 +16,15 @@ export class CalendarDay {
     this.reminders.push(reminder);
   }
 
+  public removeReminder(reminderToDelete: Reminder): void {
+    this.reminders = this.reminders.filter(r => r.id!== reminderToDelete.id);
+  }  
+
+  public updateReminder(reminderToUpdate: Reminder): void {
+    this.removeReminder(reminderToUpdate);
+    this.addReminder(reminderToUpdate);
+  }  
+
   public getSortedReminders(): Reminder[] {
     return this.reminders.sort( (rem1,rem2) => rem1.time.localeCompare(rem2.time) );
   }

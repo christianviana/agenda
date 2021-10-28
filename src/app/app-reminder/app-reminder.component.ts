@@ -52,7 +52,8 @@ export class AppReminderComponent implements OnInit {
     if (reminderToUpdade) {          
       this.reminderService.updateReminder(reminderToUpdade)
       .subscribe( rem => {                   
-        this.reminder = reminderToUpdade;
+        this.reminder = reminderToUpdade;        
+        this.calendarDay.updateReminder(this.reminder);
         this.messageService.success("Reminder updated.");          
       }, error => {
         this.messageService.error('Error updating reminder. See log for details.');            
@@ -65,7 +66,7 @@ export class AppReminderComponent implements OnInit {
     if (reminderToDelete) {          
       this.reminderService.deleteReminder(reminderToDelete)
       .subscribe( rem => {                   
-        this.calendarDay.reminders = this.calendarDay.reminders.filter(r => r.id!== reminderToDelete.id);
+        this.calendarDay.removeReminder(reminderToDelete);        
         this.messageService.success("Reminder deleted.");          
       }, error => {
         this.messageService.error('Error deleting reminder. See log for details.');            
