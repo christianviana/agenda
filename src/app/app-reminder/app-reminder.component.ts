@@ -34,7 +34,7 @@ export class AppReminderComponent implements OnInit {
     const dialogRef = this.dialog.open(AppReminderDialog, {
       height: '500px',
       width: '300px',
-      data: {reminder: this.reminder}
+      data: {reminder: this.reminder, isNew: false}
     });
 
     dialogRef.afterClosed().subscribe(result => {

@@ -37,7 +37,7 @@ export class AppCalendarDayComponent implements OnInit {
     const dialogRef = this.dialog.open(AppReminderDialog, {
       height: '500px',
       width: '300px',
-      data: {reminder: newReminder}
+      data: {reminder: newReminder, isNew: true}
     });
   
     dialogRef.afterClosed().subscribe(result => {        
