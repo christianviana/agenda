@@ -98,7 +98,9 @@ private getFisrtDayOfCalendar(selectedDate: Date): Date {
 
     // set starting date as last day of previous month
     let startDate: Date = new Date(selectedDate);
-    startDate.setDate(0);
+    while (startDate.getMonth() == selectedDate.getMonth()) {
+        startDate.setDate(startDate.getDate() - 1);
+    }
     startDate.setHours(0,0,0,0);
     
     // go back in days until last Sunday of previous month
@@ -120,8 +122,10 @@ private getLastDayOfCalendar(selectedDate: Date): Date {
     
     // set the finishing date as last day of this month
     let finishDate: Date = new Date(selectedDate);   
-    finishDate.setMonth(finishDate.getMonth()+1);
-    finishDate.setDate(0);
+    do {
+      finishDate.setDate(finishDate.getDate() + 1);
+    }
+    while (finishDate.getMonth() == selectedDate.getMonth());
     finishDate.setHours(0,0,0,0);
     
     // go forward until we encounter last Saturday of current calendar
