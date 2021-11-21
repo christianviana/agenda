@@ -1,7 +1,7 @@
 # Agenda
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.0.
-Got some ideas from this [calendar](https://dev.to/rickystam/how-to-build-a-full-screen-calendar-like-outlook-in-angular-5dcg)
+Got some ideas from this [calendar](https://dev.to/rickystam/how-to-build-a-full-screen-calendar-like-outlook-in-angular-5dcg).
 
 ## Prerequisites
 
