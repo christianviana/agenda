@@ -6,7 +6,7 @@ Got some ideas from this [calendar](https://dev.to/rickystam/how-to-build-a-full
 ## Prerequisites
 
 - NodeJs v.14.18.1 installed (https://nodejs.org/)
-- [Api-server](https://github.com/christianviana/api-server) installed and running 
+- Backend [Api-server](https://github.com/christianviana/api-server) installed and running 
 
 ## Installation
 
